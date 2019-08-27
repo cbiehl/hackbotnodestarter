@@ -1,0 +1,6 @@
+---
+applications:
+- name: hackbotstarter
+  command: npm run start
+  path: ./
+  memory: 1024M
