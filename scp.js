@@ -120,3 +120,7 @@ function callOnPremOData(destinationName){
 			})
 	});
 }
+
+module.exports = {
+	callOnPremOData
+}

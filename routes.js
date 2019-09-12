@@ -1,4 +1,5 @@
 const config = require('./config')
+const scpRequests = require('./scp')
 const express = require('express')
 const basicAuth = require('express-basic-auth')
 
@@ -21,6 +22,30 @@ module.exports = (app) => {
 		const aEntities = req.body.nlp.entities; // An object containing the recognized entites as properties
 		const sSource = req.body.nlp.source; // the last user utterance / what the user just said
 		const sSentiment = req.body.nlp.sentiment; // the sentiment according to the last user utterance
+
+		/*
+			Here you could call any webservice,
+			for instance an OData service in your on-premise system.
+
+			Example for calling an on-premise OData service:
+				scp.callOnPremOData("myDestinationName")
+					.then(aResults => {
+						res.send({
+							replies: [
+								{
+									type: 'text',
+									content: `I found ${aResults.length}` results!`
+								}
+							],
+							conversation: {
+								memory: oMemory
+							}
+						});
+					})
+					.catch(err => {
+						console.error(`Error in OData call: ${err}`);
+					})
+		*/
 
     res.send({
 			replies: [

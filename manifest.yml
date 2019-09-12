@@ -1,6 +1,9 @@
 ---
 applications:
-- name: hackbotstarter
+- name: hackbotstarter # change the app name (will be used in your app's the URL)
   command: npm run start
   path: ./
   memory: 1024M
+#  services: # bind the necessary services to your app
+#    - myconnectivityinstance
+#    - mydestinationinstance
