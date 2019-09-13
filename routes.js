@@ -1,5 +1,5 @@
 const config = require('./config')
-const scpRequests = require('./scp')
+const scp = require('./scp')
 const express = require('express')
 const basicAuth = require('express-basic-auth')
 

@@ -80,7 +80,7 @@ function callOnPremOData(destinationName){
 
 				// First we might need to get a CSRF token
 				agent.get(oRequestConfig.oDest.URL + "/sap/ZZ_MY_ODATA_SERVICE/")
-					.set("Proxy-Authorization", "Bearer " + sToken)
+					.set("Proxy-Authorization", "Bearer " + oRequestConfig.sConnectivityToken)
 					.proxy("http://" + oConnectivity.onpremise_proxy_host + ":" + oConnectivity.onpremise_proxy_port)
 					.set("Authorization", "Basic " + btoa(oRequestConfig.oDest.User + ":" + oRequestConfig.oDest.Password))
 					.set("accept", "application/json")
@@ -91,8 +91,8 @@ function callOnPremOData(destinationName){
 						const cookies =  response.header["set-cookie"];
 
 						// Perform the actual request (in this case a POST request)
-						agent.post(oDestination.URL + "/sap/ZZ_MY_ODATA_SERVICE/MyEntitySet?$format=json")
-							.set("Proxy-Authorization", "Bearer " + sToken)
+						agent.post(oRequestConfig.oDest.URL + "/sap/ZZ_MY_ODATA_SERVICE/MyEntitySet?$format=json")
+							.set("Proxy-Authorization", "Bearer " + oRequestConfig.sConnectivityToken)
 							.proxy("http://" + oConnectivity.onpremise_proxy_host + ":" + oConnectivity.onpremise_proxy_port)
 							.set("Authorization", "Basic " + btoa(oRequestConfig.oDest.User + ":" + oRequestConfig.oDest.Password))
 							.set("accept", "application/json")
@@ -103,7 +103,7 @@ function callOnPremOData(destinationName){
 							.then(res => {
 								// Resolve the promise returned by the function,
 								// i.e. return the request body
-								return resolve(res.body.d.results);
+								return resolve(res.body);
 							})
 							.catch(err => {
 								console.error(err);
